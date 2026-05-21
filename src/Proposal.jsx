@@ -680,18 +680,29 @@ export default function Proposal() {
           box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
-        @media(max-width:768px){
-          .hero {
-            padding: 20px;
-          }
+        /* --- BOTONES FLOTANTES / NAV ESTABLE RESPONSIVE --- */
+        .floating-group {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          transition: all 0.3s ease;
+        }
 
-          section {
-            padding: 80px 7%;
-          }
-
-          .section-title {
-            font-size: 2.2rem;
-          }
+        .floating-group button {
+          border-radius: 14px;
+          padding: 14px 22px;
+          font-weight: 800;
+          font-size: 0.95rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          white-space: nowrap;
         }
 
         .btn-md {
@@ -699,11 +710,26 @@ export default function Proposal() {
           color: white;
         }
 
+        .btn-md:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(6, 182, 212, 0.4);
+        }
+
         .btn-up {
-          background: rgba(255, 255, 255, 0.1);
+          background: linear-gradient(to right, #2563eb, #10b981);
           color: white;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(12px);
+          border-radius: 999px;
+          padding: 18px 24px;
+          font-weight: 800;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        .btn-up:hover {
+          color: white;
+          background: rgba(30, 41, 59, 0.9);
+          border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* --- ESTILOS DEL MODAL --- */
@@ -833,6 +859,53 @@ export default function Proposal() {
           .hero { padding: 20px; }
           section { padding: 80px 7%; }
           .section-title { font-size: 2.2rem; }
+        }
+
+        /* --- MODO RESPONSIVE (CELULARES) --- */
+        @media (max-width: 768px) {
+          .floating-group {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: auto;
+            flex-direction: row; /* Se ponen uno al lado del otro en celulares */
+            gap: 0;
+            background: rgba(15, 23, 42, 0.8); /* Fondo oscuro con blur tipo iOS */
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 16px;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+          }
+
+          .floating-group button {
+            flex: 1; /* Se dividen el espacio 50/50 equitativamente */
+            border-radius: 12px;
+            padding: 12px 8px;
+            font-size: 0.85rem;
+            box-shadow: none;
+          }
+          
+          /* Evitamos que el footer quede tapado por la barra en móviles */
+          footer {
+            padding-bottom: 90px !important; 
+          }
+        }
+
+        /* Estilos adicionales para bloques de código dentro del Modal */
+        .md-render pre {
+          background: #0f172a;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 16px;
+          border-radius: 12px;
+          overflow-x: auto;
+          margin-bottom: 20px;
+        }
+        .md-render code {
+          font-family: 'Courier New', Courier, monospace;
+          color: #38bdf8;
+          font-size: 0.9rem;
+          white-space: pre-wrap;
         }
       `}</style>
 
@@ -1255,16 +1328,16 @@ export default function Proposal() {
       </footer>
 
       {/* FLOATING ACTION BUTTON */}
-      <div className="floating">
+      {/* <div className="floating">
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           ↑ Volver Arriba
         </button>
-      </div>
+      </div> */}
 
       {/* BOTONES FLOTANTES ACCIÓN (ESQUINA INFERIOR DERECHA) */}
       <div className="floating-group">
         <button className="btn-md" onClick={() => setIsModalOpen(true)}>
-          📖 Ver / Copiar master_prompt.md
+          📖 Documentación
         </button>
         <button
           className="btn-up"
@@ -1275,12 +1348,13 @@ export default function Proposal() {
       </div>
 
       {/* --- ESTRUCTURA DEL MODAL INTERACTIVO --- */}
+      {/* --- ESTRUCTURA DEL MODAL INTERACTIVO CON 3 PESTAÑAS --- */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
             {/* Cabecera del Modal */}
             <div className="modal-header">
-              <h2>Documentación del Proyecto (master_prompt.md)</h2>
+              <h2>Documentación del Sistema</h2>
               <button
                 className="close-btn"
                 onClick={() => setIsModalOpen(false)}
@@ -1295,36 +1369,27 @@ export default function Proposal() {
                 className={`tab-button ${activeTab === "preview" ? "active" : ""}`}
                 onClick={() => setActiveTab("preview")}
               >
-                👁️ Visualizar Documento
+                👁️ Ver Master Prompt
+              </button>
+              <button
+                className={`tab-button ${activeTab === "readme" ? "active" : ""}`}
+                onClick={() => setActiveTab("readme")}
+              >
+                📌 Ver README del Proyecto
               </button>
               <button
                 className={`tab-button ${activeTab === "code" ? "active" : ""}`}
                 onClick={() => setActiveTab("code")}
               >
-                📋 Copiar Texto Plano (.md)
+                📋 Copiar Master Prompt (.md)
               </button>
             </div>
 
             {/* Cuerpo dinámico del Modal */}
             <div className="modal-body">
-              {activeTab === "preview" ? (
-                /* PESTAÑA 1: VISUALIZAR FORMATEADO */
+              {/* PESTAÑA 1: VISUALIZAR MASTER PROMPT FORMATEADO */}
+              {activeTab === "preview" && (
                 <div className="md-render">
-                  <h2>
-                    Proyecto Integral de Reforma Democrática y Transparencia
-                    Nacional para Paraguay
-                  </h2>
-                  <h2>Visión General</h2>
-                  <p>
-                    Este documento presenta una propuesta estructurada de
-                    modernización democrática, fortalecimiento institucional,
-                    participación ciudadana y auditoría tecnológica para la
-                    República del Paraguay. El objetivo es reducir la corrupción
-                    sistémica, mejorar la representación política, fortalecer el
-                    control ciudadano y aumentar la transparencia del Estado.
-                  </p>
-                  <hr />
-
                   <h1>
                     PROMPT MAESTRO — AGENTE IA PARA REFORMA DEMOCRÁTICA Y
                     TRANSPARENCIA NACIONAL EN PARAGUAY
@@ -1436,14 +1501,12 @@ export default function Proposal() {
                   <hr />
 
                   <h2>Objetivos Principales</h2>
-
                   <h3>1. Reforma democrática moderna</h3>
                   <p>
                     Ayudar a diseñar propuestas constitucionalmente viables,
                     técnicamente posibles, políticamente defendibles e
                     institucionalmente estables.
                   </p>
-
                   <h3>2. Reducción de corrupción sistémica</h3>
                   <p>
                     Diseñar mecanismos para rastrear el uso de dinero público,
@@ -1451,7 +1514,6 @@ export default function Proposal() {
                     el tráfico de influencias y aumentar la transparencia
                     estatal.
                   </p>
-
                   <h3>3. Protección contra autoritarismo</h3>
                   <p>
                     Toda propuesta debe evitar la concentración excesiva de
@@ -1459,7 +1521,6 @@ export default function Proposal() {
                     proteger los derechos humanos, la privacidad ciudadana y
                     mantener la estricta independencia judicial.
                   </p>
-
                   <h3>4. Participación ciudadana continua</h3>
                   <p>
                     Diseñar mecanismos que permitan el control ciudadano,
@@ -1488,7 +1549,6 @@ export default function Proposal() {
                   <hr />
 
                   <h2>Áreas de Especialización del Agente</h2>
-
                   <h3>Derecho y Constitución</h3>
                   <p>
                     Debés analizar la viabilidad constitucional, reformas
@@ -1536,7 +1596,6 @@ export default function Proposal() {
                   <hr />
 
                   <h2>Principios de Diseño del Sistema IA</h2>
-
                   <h3>Transparencia algorítmica</h3>
                   <p>
                     Los modelos utilizados por el Estado deben ser auditables,
@@ -1544,7 +1603,6 @@ export default function Proposal() {
                     rigurosa revisión humana y documentar criterios lógicos
                     abiertos.
                   </p>
-
                   <h3>Protección de privacidad</h3>
                   <p>
                     Debe existir una separación absoluta entre la vida privada y
@@ -1553,7 +1611,6 @@ export default function Proposal() {
                     contratos estatales y movimientos financieros públicos
                     auditables.
                   </p>
-
                   <h3>Supervisión múltiple</h3>
                   <p>
                     La IA nunca debe operar de forma autónoma o aislada. Debe
@@ -1633,7 +1690,6 @@ export default function Proposal() {
                     local, la resistencia institucional, viabilidad gradual,
                     educación ciudadana y estabilidad democrática general.
                   </p>
-
                   <p>
                     <strong>Filosofía:</strong> La democracia no debe ser
                     destruida; debe evolucionar. La tecnología no debe gobernar
@@ -1644,8 +1700,247 @@ export default function Proposal() {
                     sistémica.
                   </p>
                 </div>
-              ) : (
-                /* PESTAÑA 2: COPIAR Y PEGAR TEXTO PLANO MARCKDOWN */
+              )}
+
+              {/* PESTAÑA 2: VISUALIZAR README DEL PROYECTO FORMATEADO */}
+              {activeTab === "readme" && (
+                <div className="md-render">
+                  <h1>
+                    Proyecto Integral de Reforma Democrática y Transparencia
+                    Nacional para Paraguay
+                  </h1>
+                  <p>
+                    Un modelo conceptual y tecnológico diseñado para el
+                    fortalecimiento democrático, la reducción de la corrupción
+                    sistémica y la descentralización del control político en la
+                    República del Paraguay mediante auditoría inteligente y
+                    participación ciudadana continua.
+                  </p>
+
+                  <h2>📌 Visión General</h2>
+                  <p>
+                    El Proyecto de Reforma Democrática Nacional propone una
+                    transición hacia un modelo híbrido de democracia
+                    representativa y participativa digital. El núcleo de la
+                    propuesta no busca reemplazar las instituciones
+                    democráticas, sino dotar al ciudadano de herramientas de
+                    auditoría en tiempo real y blindar el sistema electoral
+                    contra distorsiones estructurales y el clientelismo
+                    histórico.
+                  </p>
+
+                  <h2>🛠️ Pilares Fundamentales de la Reforma</h2>
+
+                  <h3>1. Mecanismos Electorales Disruptivos</h3>
+                  <ul>
+                    <li>
+                      <strong>Voto "Ninguno me representa":</strong> Cláusula de
+                      nulidad automática de elecciones si la opción de rechazo
+                      supera el 50% de los votos válidos, inhabilitando a los
+                      candidatos rechazados para el siguiente período
+                      extraordinario (Límite: 2 repeticiones).
+                    </li>
+                    <li>
+                      <strong>
+                        Desbloqueo Absoluto de Listas (Eliminación de Listas
+                        Sábana):
+                      </strong>{" "}
+                      Transición hacia un sistema de voto directo nominal
+                      estricto, mitigando el arrastre de caudillos políticos.
+                    </li>
+                    <li>
+                      <strong>Revocatoria Ciudadana de Mandato:</strong>{" "}
+                      Activación regulada mediante firmas digitales verificado
+                      por la Justicia Electoral (requieres el 15% del padrón
+                      electoral tras el primer año de gestión).
+                    </li>
+                    <li>
+                      <strong>Disolución Extraordinaria del Congreso:</strong>{" "}
+                      Mecanismo de válvula de escape constitucional ante
+                      bloqueos institucionales extremos (ej. 12 meses sin
+                      Presupuesto General de la Nación aprobado o parálisis
+                      certificada por la CSJ).
+                    </li>
+                  </ul>
+
+                  <h3>
+                    2. Sistema Nacional de Auditoría con Inteligencia Artificial
+                  </h3>
+                  <p>
+                    Un paradigma de control donde la tecnología rastrea recursos
+                    públicos e identifica anomalías matemáticas financieras sin
+                    vulnerar los derechos civiles ni la privacidad de la
+                    ciudadanía.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Sujetos Obligados:</strong> Inscripción mandatoria
+                      y automatizada para las máximas autoridades (Presidente,
+                      Vicepresidente, Senadores, Diputados, Ministros,
+                      Intendentes y Directores de Entidades
+                      Binacionales/Estatales).
+                    </li>
+                    <li>
+                      <strong>Vectores de Análisis IA:</strong>
+                      <ul>
+                        <li>
+                          Incrementos patrimoniales no justificados mediante
+                          cruces de activos.
+                        </li>
+                        <li>
+                          Grafos de relaciones familiares y comerciales en
+                          licitaciones públicas (detección de nepotismo y
+                          empresas fantasma).
+                        </li>
+                        <li>
+                          Análisis predictivo de sobreprecios en el portal de
+                          Contrataciones Públicas (DNCP).
+                        </li>
+                        <li>
+                          Garantías Constitucionales: Aislamiento estricto de
+                          datos privados. El sistema opera bajo logs auditables
+                          y requiere autorización judicial para derivaciones
+                          penales, evitando la persecución ideológica.
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  <h2>🏗️ Arquitectura Tecnológica del Observatorio</h2>
+                  <p>
+                    El ecosistema técnico del proyecto se enfoca en la
+                    descentralización, la inmutabilidad y el procesamiento local
+                    de datos para garantizar soberanía y auditoría transparente:
+                  </p>
+
+                  <pre>
+                    <code>{`[Fuentes Públicas: DNCP / TSJE / Declaraciones]
+                 │
+                 ▼
+     [Orquestación local: n8n]
+                 │
+                 ▼
+   [Análisis de Redes y Grafos (IA)] ◄───► [Modelos de Lenguaje Locales (Ollama / Llama 3)]
+                 │
+                 ▼
+    [Persistencia: PostgreSQL / Prisma]
+                 │
+                 ▼
+[Frontend: Portal Ciudadano de Transparencia]`}</code>
+                  </pre>
+
+                  <ul>
+                    <li>
+                      <strong>Pipeline de Datos (ETL):</strong> Orquestación
+                      mediante n8n en entornos contenerizados para extraer,
+                      estructurar y normalizar datos provenientes de APIs
+                      públicas del Estado paraguayo.
+                    </li>
+                    <li>
+                      <strong>Motor de Extracción y Estructuración:</strong>{" "}
+                      Integración de LLMs locales (Llama 3 vía Ollama) para
+                      transformar textos regulatorios, actas y pliegos de bases
+                      y condiciones en esquemas JSON estrictos y validados.
+                    </li>
+                    <li>
+                      <strong>Capa de Persistencia y API:</strong> Modelado
+                      relacional robusto con PostgreSQL y ORMs de alta
+                      eficiencia (Prisma) para la trazabilidad inmutable de
+                      estados financieros de los funcionarios.
+                    </li>
+                  </ul>
+
+                  <h2>🗺️ Hoja de Ruta de Implementación (Roadmap)</h2>
+                  <pre>
+                    <code>{`Fase 1: Construcción Ciudadana  ➔  Fase 2: Proyecto Legal  ➔  Fase 3: Presión Democrática  ➔  Fase 4: Reforma Constitucional  ➔  Fase 5: Despliegue Técnico`}</code>
+                  </pre>
+
+                  <ol style={{ paddingLeft: "22px", marginBottom: "15px" }}>
+                    <li style={{ marginBottom: "8px" }}>
+                      <strong>Fase 1 — Construcción Ciudadana:</strong> Alianzas
+                      con universidades, centros de tecnología, juristas y la
+                      sociedad civil para el desarrollo del núcleo conceptual.
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <strong>Fase 2 — Proyecto Legal:</strong> Redacción de
+                      anteproyectos de ley, enmiendas constitucionales y
+                      especificaciones técnicas de APIs abiertas.
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <strong>Fase 3 — Presión Democrática:</strong> Recolección
+                      digital de firmas y campañas públicas utilizando
+                      plataformas digitales de verificación de identidad.
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <strong>Fase 4 — Congreso y Reformas:</strong> Debate
+                      legislativo o convocatoria a Convención Nacional
+                      Constituyente para la reestructuración de los artículos
+                      pertinentes.
+                    </li>
+                    <li style={{ marginBottom: "8px" }}>
+                      <strong>Fase 5 — Auditoría Permanente:</strong> Puesta en
+                      marcha de los nodos independientes de auditoría con IA y
+                      dashboards de acceso público.
+                    </li>
+                  </ol>
+
+                  <h2>💻 Configuración Local y Despliegue</h2>
+                  <p>
+                    <strong>Requisitos Previos:</strong> Docker y Docker
+                    Compose, Node.js (v20 o superior).
+                  </p>
+
+                  <h3>Clonar e Iniciar el Entorno</h3>
+                  <pre>
+                    <code>{`# Clonar el repositorio
+git clone https://github.com/josepanz/Proyecto-Observatorio-PY.git
+cd Proyecto-Observatorio-PY
+
+# Levantar la infraestructura de base (Base de datos, n8n, Ollama)
+docker-compose up -d`}</code>
+                  </pre>
+
+                  <p>
+                    Para visualizar la Landing Page actual del proyecto, podés
+                    abrir directamente el archivo <code>index.html</code> en tu
+                    navegador o visitar el despliegue en{" "}
+                    <a
+                      href="https://josepanz.github.io/Proyecto-Observatorio-PY/"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ color: "#34d399", textDecoration: "underline" }}
+                    >
+                      GitHub Pages / Proyecto Observatorio PY Site
+                    </a>
+                    .
+                  </p>
+
+                  <h2>⚖️ Declaración de Principios y Advertencia Legal</h2>
+                  <p>
+                    Este proyecto es una propuesta de diseño institucional y
+                    tecnológico conceptual. Cualquier implementación en el
+                    ecosistema legal paraguayo requiere una estricta
+                    armonización con la Constitución Nacional, tratados
+                    internacionales de Derechos Humanos, leyes de protección de
+                    datos personales y, fundamentalmente, la supervisión humana
+                    independiente para evitar el tecnocratismo o sesgos
+                    algorítmicos. La tecnología debe servir al ciudadano, no
+                    gobernar al ser humano.
+                  </p>
+
+                  <p>
+                    <em>
+                      🔬 Desarrollado de forma abierta por y para ciudadanos.
+                      Las contribuciones orientadas a la optimización del
+                      código, arquitectura de datos y marcos de derecho
+                      constitucional son bienvenidas mediante Pull Requests.
+                    </em>
+                  </p>
+                </div>
+              )}
+
+              {/* PESTAÑA 3: COPIAR Y PEGAR TEXTO PLANO MARCKDOWN */}
+              {activeTab === "code" && (
                 <div className="md-raw-container">
                   <button
                     className="copy-floating-btn"
