@@ -1,0 +1,700 @@
+# Proyecto Integral de Reforma Democrática y Transparencia Nacional para Paraguay
+
+## Visión General
+
+Este documento presenta una propuesta estructurada de modernización democrática, fortalecimiento institucional, participación ciudadana y auditoría tecnológica para la República del Paraguay. El objetivo es reducir la corrupción sistémica, mejorar la representación política, fortalecer el control ciudadano y aumentar la transparencia del Estado.
+
+---
+
+# Archivo HTML Completo
+
+Copiá y pegá todo este contenido en un archivo llamado:
+
+```html
+index.html
+```
+
+Luego abrilo en cualquier navegador.
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto de Reforma Democrática Nacional</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(16,185,129,0.25), transparent 30%),
+        #020617;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #cbd5e1;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .primary {
+      background: linear-gradient(to right, #2563eb, #10b981);
+      color: white;
+      box-shadow: 0 10px 30px rgba(59,130,246,0.35);
+    }
+
+    .primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    section {
+      padding: 100px 10%;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+
+    .section-subtitle {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+      max-width: 900px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(96,165,250,0.5);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #34d399;
+    }
+
+    .card p {
+      color: #cbd5e1;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+      border-left: 3px solid #3b82f6;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: #10b981;
+      border-radius: 50%;
+      position: absolute;
+      left: -40px;
+      top: 4px;
+      border: 3px solid white;
+    }
+
+    .timeline-item h4 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #f8fafc;
+    }
+
+    .logic-box {
+      background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(16,185,129,0.18));
+      padding: 30px;
+      border-radius: 24px;
+      margin-top: 25px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logic-box ul {
+      padding-left: 22px;
+      margin-top: 18px;
+    }
+
+    .logic-box li {
+      margin-bottom: 12px;
+    }
+
+    .highlight {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .quote {
+      background: rgba(255,255,255,0.04);
+      border-left: 5px solid #10b981;
+      padding: 30px;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      margin-top: 35px;
+      color: #e2e8f0;
+    }
+
+    footer {
+      padding: 60px 10%;
+      text-align: center;
+      background: #020617;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(16,185,129,0.15);
+      color: #34d399;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .floating {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 1000;
+    }
+
+    .floating button {
+      background: linear-gradient(to right, #2563eb, #10b981);
+      color: white;
+      border-radius: 999px;
+      padding: 18px 24px;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    @media(max-width:768px){
+      .hero {
+        padding: 20px;
+      }
+
+      section {
+        padding: 80px 7%;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="pill">Proyecto Nacional de Reforma Democrática</div>
+
+      <h1>
+        Un Paraguay donde el poder vuelva a pertenecer al pueblo.
+      </h1>
+
+      <p>
+        Una propuesta moderna, tecnológica y estructurada para fortalecer la democracia, reducir la corrupción sistémica, eliminar privilegios políticos excesivos y construir un Estado más transparente, participativo y auditable.
+      </p>
+
+      <div class="cta">
+        <button class="primary" onclick="window.print()">
+          Exportar / Guardar PDF
+        </button>
+
+        <button class="secondary" onclick="scrollToSection('reformas')">
+          Ver Propuesta
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="reformas">
+    <h2 class="section-title">
+      Reformas Fundamentales
+    </h2>
+
+    <p class="section-subtitle">
+      Este proyecto busca equilibrar gobernabilidad, control ciudadano, estabilidad institucional y transparencia pública mediante mecanismos modernos y verificables.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Voto “Ninguno me representa”</h3>
+
+        <p>
+          Si la opción “NINGUNO” supera el 50% de votos válidos, la elección se anula automáticamente.
+        </p>
+
+        <div class="logic-box">
+          <strong>Lógica:</strong>
+
+          <ul>
+            <li>Si gana “NINGUNO” → nueva elección en 90 días.</li>
+            <li>Los candidatos rechazados no podrán volver a presentarse.</li>
+            <li>Si vuelve a ganar “NINGUNO” → se habilitan candidaturas independientes extraordinarias.</li>
+            <li>Máximo 2 repeticiones para evitar crisis permanente.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Eliminación Total de Listas Sábana</h3>
+
+        <p>
+          Cada ciudadano votará directamente por personas específicas y no por bloques automáticos arrastrados por partidos.
+        </p>
+
+        <div class="logic-box">
+          <strong>Resultado:</strong>
+
+          <ul>
+            <li>Mayor responsabilidad individual.</li>
+            <li>Menor poder de caudillos políticos.</li>
+            <li>Más competencia por mérito.</li>
+            <li>Mayor castigo electoral a malos representantes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Revocatoria Ciudadana de Mandato</h3>
+
+        <p>
+          El pueblo podrá remover autoridades electas mediante mecanismos regulados y auditados.
+        </p>
+
+        <div class="logic-box">
+          <strong>Condiciones:</strong>
+
+          <ul>
+            <li>Debe transcurrir al menos 1 año de gestión.</li>
+            <li>Se requiere 15% del padrón electoral.</li>
+            <li>El proceso será auditado por la Justicia Electoral.</li>
+            <li>Solo puede activarse una vez por período.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Disolución Extraordinaria del Congreso</h3>
+
+        <p>
+          En situaciones extremas de bloqueo institucional, podrá convocarse renovación legislativa extraordinaria.
+        </p>
+
+        <div class="logic-box">
+          <strong>Aplicación:</strong>
+
+          <ul>
+            <li>12 meses sin presupuesto aprobado.</li>
+            <li>Parálisis legislativa certificada.</li>
+            <li>Crisis institucional validada por Corte Suprema.</li>
+            <li>Convocatoria inmediata a nuevas elecciones.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Transparencia Pública Total</h3>
+
+        <p>
+          Todo funcionario político deberá registrar y hacer auditables sus movimientos públicos relevantes.
+        </p>
+
+        <div class="logic-box">
+          <strong>Información pública obligatoria:</strong>
+
+          <ul>
+            <li>Patrimonio actualizado.</li>
+            <li>Contratos y licitaciones.</li>
+            <li>Viajes oficiales.</li>
+            <li>Votaciones legislativas.</li>
+            <li>Reuniones institucionales.</li>
+            <li>Financiamiento político.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Plataforma Nacional Ciudadana</h3>
+
+        <p>
+          Una plataforma digital verificable permitirá participación democrática continua.
+        </p>
+
+        <div class="logic-box">
+          <strong>Funciones:</strong>
+
+          <ul>
+            <li>Presentar propuestas ciudadanas.</li>
+            <li>Solicitar auditorías.</li>
+            <li>Firmas digitales verificadas.</li>
+            <li>Consulta pública de leyes.</li>
+            <li>Seguimiento en tiempo real.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">
+      Sistema Nacional de Auditoría con Inteligencia Artificial
+    </h2>
+
+    <p class="section-subtitle">
+      El objetivo no es vigilar la vida privada de las personas, sino proteger el dinero público y detectar patrones de corrupción sistémica.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Inscripción Obligatoria</h3>
+
+        <p>
+          Todo funcionario de alto nivel deberá integrarse obligatoriamente al sistema nacional de auditoría digital.
+        </p>
+
+        <div class="logic-box">
+          <strong>Incluye:</strong>
+
+          <ul>
+            <li>Presidente.</li>
+            <li>Vicepresidente.</li>
+            <li>Senadores.</li>
+            <li>Diputados.</li>
+            <li>Ministros.</li>
+            <li>Intendentes.</li>
+            <li>Directores estatales.</li>
+            <li>Altos cargos públicos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Qué analizará la IA</h3>
+
+        <div class="logic-box">
+          <ul>
+            <li>Incrementos patrimoniales sospechosos.</li>
+            <li>Relaciones familiares en contratos.</li>
+            <li>Sobreprecios.</li>
+            <li>Licitaciones repetidas.</li>
+            <li>Empresas fantasma.</li>
+            <li>Coincidencias financieras irregulares.</li>
+            <li>Redes de tráfico de influencias.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Protección de Privacidad</h3>
+
+        <p>
+          La auditoría no podrá acceder a contenido personal privado no relacionado con recursos públicos.
+        </p>
+
+        <div class="logic-box">
+          <strong>Protecciones:</strong>
+
+          <ul>
+            <li>No acceso a conversaciones privadas.</li>
+            <li>No espionaje ciudadano.</li>
+            <li>Uso exclusivo para control estatal.</li>
+            <li>Supervisión judicial obligatoria.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Alertas Automáticas</h3>
+
+        <p>
+          El sistema emitirá alertas automáticas cuando existan indicadores fuertes de irregularidades.
+        </p>
+
+        <div class="logic-box">
+          <strong>Ejemplos:</strong>
+
+          <ul>
+            <li>Patrimonio crece sin justificación.</li>
+            <li>Empresa amiga gana múltiples licitaciones.</li>
+            <li>Familiares contratados masivamente.</li>
+            <li>Desvíos presupuestarios anormales.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quote">
+      “La corrupción deja huellas matemáticas. El objetivo de la tecnología no es reemplazar la justicia humana, sino ayudar a detectarla antes de que destruya las instituciones.”
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">
+      Cómo Implementarlo en Paraguay
+    </h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <h4>Fase 1 — Construcción Ciudadana</h4>
+
+        <p>
+          Organización social, universidades, juristas, expertos técnicos y ciudadanos desarrollan propuestas concretas y educan públicamente.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Fase 2 — Proyecto Legal</h4>
+
+        <p>
+          Redacción de leyes, reformas constitucionales y mecanismos de implementación tecnológica.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Fase 3 — Presión Democrática</h4>
+
+        <p>
+          Recolección de firmas, campañas públicas, debates y movilización democrática pacífica.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Fase 4 — Congreso y Reformas</h4>
+
+        <p>
+          Aprobación legislativa y posible convocatoria a Convención Nacional Constituyente para reformas profundas.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h4>Fase 5 — Auditoría y Supervisión</h4>
+
+        <p>
+          Creación de organismos técnicos independientes y sistemas de auditoría nacional permanente.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">
+      Principios Fundamentales
+    </h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Equilibrio de Poder</h3>
+
+        <p>
+          Ningún poder del Estado debe dominar completamente sobre otro.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Participación Ciudadana</h3>
+
+        <p>
+          La democracia no debe limitarse únicamente al día de elecciones.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Transparencia Radical</h3>
+
+        <p>
+          El dinero público debe ser completamente rastreable.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Protección Institucional</h3>
+
+        <p>
+          Ninguna reforma debe abrir puertas a autoritarismos disfrazados.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <h3>
+      Proyecto de Reforma Democrática Nacional
+    </h3>
+
+    <p style="margin-top: 15px; max-width: 900px; margin-inline: auto;">
+      Esta propuesta representa un modelo conceptual orientado al fortalecimiento democrático, transparencia institucional y participación ciudadana moderna en Paraguay.
+    </p>
+  </footer>
+
+  <div class="floating">
+    <button onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      ↑ Volver Arriba
+    </button>
+  </div>
+
+  <script>
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+</body>
+</html>
+```
+
+---
+
+# Cómo exportar en PDF
+
+## Método rápido
+
+1. Abrí el archivo HTML.
+2. Presioná:
+
+```text
+CTRL + P
+```
+
+3. Elegí:
+
+```text
+Guardar como PDF
+```
+
+4. Guardá el archivo.
+
+---
+
+# Recomendaciones futuras
+
+## Mejoras posibles
+
+- Integrar gráficos estadísticos reales.
+- Agregar simulaciones electorales.
+- Conectar APIs públicas.
+- Dashboard en tiempo real.
+- Visualización de corrupción detectada.
+- Portal ciudadano interactivo.
+- Sistema de firmas digitales.
+- Blockchain de transparencia estatal.
+- Auditoría pública de licitaciones.
+
+---
+
+# Advertencia importante
+
+Este documento representa una propuesta conceptual democrática y tecnológica. Cualquier implementación real requeriría:
+
+- debate constitucional,
+- evaluación jurídica,
+- protección de derechos fundamentales,
+- controles contra abuso estatal,
+- y supervisión independiente.
+
+La tecnología debe fortalecer la democracia, no reemplazarla.
+
